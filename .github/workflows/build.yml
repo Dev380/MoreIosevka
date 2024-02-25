@@ -21,4 +21,4 @@ jobs:
           
       - name: Run build in docker
         run: | 
-          docker run -it --rm -v $PWD:/work fontcc ttf::IosevkaCurlyLig ttf::IosevkaCurlyLigMono ttf::IosevkaCurlyLigTerm ttf::IosevkaCurlyLigPropo
+          docker run -i --rm -v $PWD:/work fontcc ttf::IosevkaCurlyLig ttf::IosevkaCurlyLigMono ttf::IosevkaCurlyLigTerm ttf::IosevkaCurlyLigPropo
