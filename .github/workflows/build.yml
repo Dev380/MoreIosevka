@@ -1,0 +1,15 @@
+name: Build the font (courtesy of Bmono)
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Remove old build
+        run: rm -rf dist
+
+      - name: Build fonts
+        run: docker run -i -v $(pwd):/build avivace/iosevka-build
