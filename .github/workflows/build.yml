@@ -22,3 +22,11 @@ jobs:
       - name: Run build in docker
         run: | 
           docker run -i --rm -v $PWD:/work fontcc ttf::IosevkaCurlyLigs ttf::IosevkaCurlyLigsMono ttf::IosevkaCurlyLigsTerm ttf::IosevkaCurlyLigsPropo
+          
+      - name: Push
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+          git add dist/
+          git commit -m "New build"
+          git push
