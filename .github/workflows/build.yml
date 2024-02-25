@@ -26,13 +26,9 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           
-      - name: Add changes
+      - name: Add and push changes
         run: |
           git add dist/
           git commit -m "New build"
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ env.TOKEN }}
+          git push
         
