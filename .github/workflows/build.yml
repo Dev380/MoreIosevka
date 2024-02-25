@@ -19,12 +19,20 @@ jobs:
           cd ../..
           rm -rf mkdkimg/
           
-      - name: Run build in docker & push
+      - name: Run build in docker
         run: | 
           cd $GITHUB_WORKSPACE
           docker run -i --rm -v $PWD:/work fontcc ttf::IosevkaCurlyLigs ttf::IosevkaCurlyLigsMono ttf::IosevkaCurlyLigsTerm ttf::IosevkaCurlyLigsPropo
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
+          
+      - name: Add changes
+        run: |
           git add dist/
           git commit -m "New build"
-          git push
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ env.TOKEN }}
+        
