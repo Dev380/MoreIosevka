@@ -11,5 +11,14 @@ jobs:
       - name: Remove old build
         run: rm -rf dist
 
-      - name: Build fonts
-        run: docker run -i -v $(pwd):/build avivace/iosevka-build
+      - name: Install docker image
+        run: |
+          git clone --depth=1 https://github.com/be5invis/Iosevka.git $HOME/mkdkimg
+          cd $HOME/mkdkimg/docker
+          docker build -t=fontcc .
+          cd ../..
+          rm -rf mkdkimg/
+          
+      - name: Run build in docker
+        run: | 
+          docker run -it --rm -v $PWD:/work fontcc ttf::IosevkaCurlyLig ttf::IosevkaCurlyLigMono ttf::IosevkaCurlyLigTerm ttf::IosevkaCurlyLigPropo
