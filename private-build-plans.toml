@@ -1,0 +1,43 @@
+[buildPlans.IosevkaCurlyLigs]
+family = "Iosevka CurlyLigs"
+spacing =  "normal"
+serifs = "sans"
+noCvSs = true
+exportGlyphNames = true
+[buildPlans.IosevkaCurlyLigs.variants]
+inherits = "ss20"
+[buildPlans.IosevkaCurlyLigs.ligations]
+inherits = "dligs"
+
+[buildPlans.IosevkaCurlyLigsTerm]
+family = "Iosevka CurlyLigs Term"
+spacing =  "term"
+serifs = "sans"
+noCvSs = true
+exportGlyphNames = true
+[buildPlans.IosevkaCurlyLigsTerm.variants]
+inherits = "ss20"
+[buildPlans.IosevkaCurlyLigsTerm.ligations]
+inherits = "dligs"
+
+[buildPlans.IosevkaCurlyLigsMono]
+family = "Iosevka CurlyLigs Mono"
+spacing =  "fixed"
+serifs = "sans"
+noCvSs = true
+exportGlyphNames = true
+[buildPlans.IosevkaCurlyLigsMono.variants]
+inherits = "ss20"
+[buildPlans.IosevkaCurlyLigsMono.ligations]
+inherits = "dligs"
+
+[buildPlans.IosevkaCurlyLigsPropo]
+family = "Iosevka CurlyLigs Propo"
+spacing =  "quasi-proportional"
+serifs = "sans"
+noCvSs = true
+exportGlyphNames = true
+[buildPlans.IosevkaCurlyLigsPropo.variants]
+inherits = "ss20"
+[buildPlans.IosevkaCurlyLigsPropo.ligations]
+inherits = "dligs"
