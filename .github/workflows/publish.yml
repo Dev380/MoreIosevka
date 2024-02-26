@@ -41,7 +41,7 @@ jobs:
         arch=('x86_64')
         url='https://github.com/Dev380/MoreIosevka'
         license=('MIT')
-        depends=('')
+        depends=('core/glibc')
         source=("$PACKAGE_NAME/*.ttf")
         noextract=("$PACKAGE_NAME")
         install() {
