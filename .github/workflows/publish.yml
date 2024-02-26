@@ -51,7 +51,7 @@ jobs:
 
         # Build the package
         cd "$PKG_DIR"
-        yes | pacman -Syu
+        pacman -Syu --noconfirm
         pacman -S sudo
         chmod -R 777 .
         su nobody -c 'makepkg -si'
