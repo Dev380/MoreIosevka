@@ -5,15 +5,12 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-
+    container:
+      image: archlinux
+      
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Install necessary tools
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y pkgbuild-introspection
+      uses: actions/checkout@v3
 
     - name: Create TTF package
       run: |
