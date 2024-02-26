@@ -51,7 +51,7 @@ jobs:
         # Build the package
         cd "$PKG_DIR"
         pacman -Syu --noconfirm
-        pacman -S sudo fakeroot strip --noconfirm
+        pacman -S sudo fakeroot base-devel --noconfirm
         chmod -R 777 .
         sudo -u nobody makepkg -si
 
