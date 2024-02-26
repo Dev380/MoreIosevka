@@ -52,7 +52,7 @@ jobs:
         # Build the package
         cd "$PKG_DIR"
         chmod -R 777 .
-        sudo -u nobody makepkg -si
+        su nobody -c 'makepkg -si'
 
         # Into the repo
         cd $GITHUB_WORKSPACE
