@@ -6,7 +6,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     container:
-      image: archlinux
+      image: archlinux:base
       
     steps:
     - name: Checkout repository
