@@ -31,4 +31,71 @@ jobs:
           git add dist/
           git commit -m "New build"
           git push
+
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install necessary tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pkgbuild-introspection
+
+    - name: Create TTF package
+      run: |
+        # Define the package name
+        PACKAGE_NAME="ttf-iosevka-curly-ligs"
+
+        # Define the source directory for TTF files
+        SOURCE_DIR="dist"
+
+        # Define the destination directory for the package
+        DEST_DIR="/path/to/your/arch/repo/x86_64"
+
+        # Create a temporary directory for the package
+        PKG_DIR=$(mktemp -d)
+
+        # Copy TTF files to the package directory
+        cp -r "$SOURCE_DIR/IosevkaCurlyLigs/TTF" "$PKG_DIR/$PACKAGE_NAME"
+        cp -r "$SOURCE_DIR/IosevkaCurlyLigsPropo/TTF" "$PKG_DIR/$PACKAGE_NAME"
+        cp -r "$SOURCE_DIR/IosevkaCurlyLigsMono/TTF" "$PKG_DIR/$PACKAGE_NAME"
+        cp -r "$SOURCE_DIR/IosevkaCurlyLigsTerm/TTF" "$PKG_DIR/$PACKAGE_NAME"
+
+        # Create a PKGBUILD file
+        cat <<EOF > "$PKG_DIR/PKGBUILD"
+        pkgname='$PACKAGE_NAME'
+        pkgver=1.0.0
+        pkgrel=1
+        pkgdesc='TTF files for Iosevka Curly Ligs'
+        arch=('x86_64')
+        url='https://github.com/Dev380/MoreIosevka'
+        license=('MIT')
+        depends=('')
+        source=("$PACKAGE_NAME/*.ttf")
+        noextract=("$PACKAGE_NAME")
+        install() {
+            install -Dm644 "$srcdir/$PACKAGE_NAME/*.ttf" "/usr/share/fonts/TTF/$PACKAGE_NAME/"
+        }
+        EOF
+
+        # Build the package
+        cd "$PKG_DIR"
+        makepkg -si
+
+        # Into the repo
+        cd $GITHUB_WORKSPACE
+        mkdir x86_64 | true
+        cd x86_64
+        repo-add x86_64.db.tar.gz *.pkg.tar.zst"
         
+    - name: Commit
+      run: |
+        cd $GITHUB_WORKSPACE
+        git config user.name github-actions[bot]
+        git config user.email github-actions[bot]@users.noreply.github.com
+        git add x86_64
+        git commit -m "New repo push"
+        git push
