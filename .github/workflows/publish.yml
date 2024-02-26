@@ -32,6 +32,8 @@ jobs:
         cp -r "$SOURCE_DIR/IosevkaCurlyLigsMono/TTF" "$PKG_DIR/$PACKAGE_NAME"
         cp -r "$SOURCE_DIR/IosevkaCurlyLigsTerm/TTF" "$PKG_DIR/$PACKAGE_NAME"
 
+        tar cf sources.tar $PKG_DIR/*
+
         # Create a PKGBUILD file
         cat <<EOF > "$PKG_DIR/PKGBUILD"
         pkgname='$PACKAGE_NAME'
@@ -41,9 +43,10 @@ jobs:
         arch=('x86_64')
         url='https://github.com/Dev380/MoreIosevka'
         license=('MIT')
-        source=("$PACKAGE_NAME/*.ttf")
+        source=("sources.tar")
         noextract=("$PACKAGE_NAME")
         install() {
+            tar xf path/to/source.tar --directory $srcdir
             install -Dm644 "$srcdir/$PACKAGE_NAME/*.ttf" "/usr/share/fonts/TTF/$PACKAGE_NAME/"
         }
         EOF
