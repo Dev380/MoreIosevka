@@ -54,7 +54,7 @@ jobs:
         pacman -Syu --noconfirm
         pacman -S sudo --noconfirm
         chmod -R 777 .
-        su nobody -c 'makepkg -si'
+        sudo -u nobody makepkg -si
 
         # Into the repo
         cd $GITHUB_WORKSPACE
